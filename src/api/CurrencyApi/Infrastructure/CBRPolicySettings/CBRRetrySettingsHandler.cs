@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Currency.Contract.LogManager;
+using Microsoft.Extensions.Logging;
+using NLog;
 using Polly;
 using Polly.Contrib.WaitAndRetry;
 
@@ -9,9 +11,6 @@ namespace CurrencyApi.Infrastructure.CBRPolicySettings;
 /// </summary>
 public class CBRRetrySettingsHandler : IRetrySettingsHandler
 {
-    // TODO: Add log manager!
-    private readonly ILogger<CBRRetrySettingsHandler> _logger;
-    
     private readonly TimeSpan[] _delay;
     public CBRRetrySettingsHandler(CBRRetryPolicySettings retrySettings)
     {
@@ -39,19 +38,20 @@ public class CBRRetrySettingsHandler : IRetrySettingsHandler
     /// <summary>
     /// On retry strategy (Logger strategy).
     /// </summary>
-    public Task OnRetry(DelegateResult<HttpResponseMessage> result, TimeSpan timeSpan, int retryCount, Context context)
+    public Task OnRetry(DelegateResult<HttpResponseMessage> result, TimeSpan timeSpan, int retryCount, Context context, ILoggingManager logger)
     {
-        if (_logger is null)
+        if (logger is null)
         {
-            return Task.CompletedTask;
-        }
-        if (result.Result is not null)
-        {
-            _logger.LogWarning($"Request failed with {result.Result.StatusCode}. Waiting {timeSpan} before next retry. Retry attempt {retryCount}");
             return Task.CompletedTask;
         }
 
-        _logger.LogWarning($"Request failed because network failure. Waiting {timeSpan} before next retry. Retry attempt {retryCount}");
+        if (result.Result is not null)
+        {
+            logger.LogWarning($"Request failed with {result.Result.StatusCode}. Waiting {timeSpan} before next retry. Retry attempt {retryCount}");
+            return Task.CompletedTask;
+        }
+
+        logger.LogWarning($"Request failed because network failure. Waiting {timeSpan} before next retry. Retry attempt {retryCount}");
         return Task.CompletedTask;
     }
 }

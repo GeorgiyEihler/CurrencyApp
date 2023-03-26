@@ -1,4 +1,6 @@
-﻿using CurrencyApi.Infrastructure.CBRPolicySettings;
+﻿using Currency.Contract.LogManager;
+using Currency.Logger;
+using CurrencyApi.Infrastructure.CBRPolicySettings;
 using CurrencyApi.Infrastructure.ClientSettings;
 
 namespace CurrencyApi.Extention;
@@ -26,7 +28,7 @@ public static class ServiceExtensions
         if (cbrClientSettings is not null)
         {
             services.AddHttpClient(ClientConstants.CBRClient, httpClient =>
-                httpClient.BaseAddress = new Uri(cbrClientSettings.Name))
+                httpClient.BaseAddress = new Uri(cbrClientSettings.BaseUri))
                 .AddRetryPolicy(policySettings);
         }
 
@@ -35,8 +37,12 @@ public static class ServiceExtensions
         if (cbrDailySettings is not null)
         {
             services.AddHttpClient(ClientConstants.CBRDailyClient, httpClient =>
-                httpClient.BaseAddress = new Uri(cbrDailySettings.Name))
+                httpClient.BaseAddress = new Uri(cbrDailySettings.BaseUri))
                 .AddRetryPolicy(policySettings);
         }
     }
+
+
+    public static void ConfigureLogging(this IServiceCollection services) =>
+        services.AddSingleton<ILoggingManager, CurrencyLogManager>();
 }
