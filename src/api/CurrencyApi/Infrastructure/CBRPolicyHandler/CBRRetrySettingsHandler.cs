@@ -1,10 +1,11 @@
 ﻿using Currency.Contract.LogManager;
+using CurrencyApi.Infrastructure.CBRPolicySettings;
 using Microsoft.Extensions.Logging;
 using NLog;
 using Polly;
 using Polly.Contrib.WaitAndRetry;
 
-namespace CurrencyApi.Infrastructure.CBRPolicySettings;
+namespace CurrencyApi.Infrastructure.CBRPolicyHandler;
 
 /// <summary>
 /// CBRRetryBaseSettings.
@@ -14,7 +15,7 @@ public class CBRRetrySettingsHandler : IRetrySettingsHandler
     private readonly TimeSpan[] _delay;
     public CBRRetrySettingsHandler(CBRRetryPolicySettings retrySettings)
     {
-        _delay = Backoff.DecorrelatedJitterBackoffV2(medianFirstRetryDelay: retrySettings.MedianFirstRetryDelay, 
+        _delay = Backoff.DecorrelatedJitterBackoffV2(medianFirstRetryDelay: retrySettings.MedianFirstRetryDelaySeconds,
             retryCount: retrySettings.RetryCount)
             .ToArray();
 

@@ -1,6 +1,7 @@
 ﻿using Currency.Contract.LogManager;
 using Currency.Logger;
 using CurrencyApi.Infrastructure.CBRPolicySettings;
+using CurrencyApi.Infrastructure.ClientPolicyBuilder;
 using CurrencyApi.Infrastructure.ClientSettings;
 
 namespace CurrencyApi.Extention;
@@ -16,11 +17,18 @@ public static class ServiceExtensions
     {
         var clientSection = configuration.GetSection("HttpClient").Get<HttpClientSettings[]>();
 
-        var policySettings = configuration.GetSection("PolicySettings").Get<CBRRetryPolicySettings>();
+        var retryPolicySettings = configuration.GetSection("RetryPolicySettings").Get<CBRRetryPolicySettings>();
 
-        if (policySettings is null)
+        var circuitBreakerPolicySettings = configuration.GetSection("CircuitBreakerPolicySettings").Get<CBRCircuitBreakerPolicySettings>();
+
+        if (retryPolicySettings is null)
         {
-            throw new ArgumentNullException(nameof(policySettings));
+            throw new ArgumentNullException(nameof(retryPolicySettings));
+        }
+
+        if (circuitBreakerPolicySettings is null)
+        {
+            throw new ArgumentNullException(nameof(circuitBreakerPolicySettings));
         }
 
         var cbrClientSettings = clientSection?.Where(c => c.Name == ClientConstants.CBRClient).FirstOrDefault();
@@ -29,7 +37,8 @@ public static class ServiceExtensions
         {
             services.AddHttpClient(ClientConstants.CBRClient, httpClient =>
                 httpClient.BaseAddress = new Uri(cbrClientSettings.BaseUri))
-                .AddRetryPolicy(policySettings);
+                .AddRetryPolicy(retryPolicySettings)
+                .AddCircuitBreakerPolicy(circuitBreakerPolicySettings);
         }
 
         var cbrDailySettings = clientSection?.Where(c => c.Name == ClientConstants.CBRDailyClient).FirstOrDefault();
@@ -38,11 +47,15 @@ public static class ServiceExtensions
         {
             services.AddHttpClient(ClientConstants.CBRDailyClient, httpClient =>
                 httpClient.BaseAddress = new Uri(cbrDailySettings.BaseUri))
-                .AddRetryPolicy(policySettings);
+                .AddRetryPolicy(retryPolicySettings)
+                .AddCircuitBreakerPolicy(circuitBreakerPolicySettings);
         }
     }
 
-
+    /// <summary>
+    /// Configure logging service.
+    /// </summary>
+    /// <param name="services">Service collection.</param>
     public static void ConfigureLogging(this IServiceCollection services) =>
         services.AddSingleton<ILoggingManager, CurrencyLogManager>();
 }

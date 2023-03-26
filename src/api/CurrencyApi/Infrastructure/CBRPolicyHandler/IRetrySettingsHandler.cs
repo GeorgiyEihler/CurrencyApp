@@ -1,7 +1,7 @@
 ﻿using Currency.Contract.LogManager;
 using Polly;
 
-namespace CurrencyApi.Infrastructure.CBRPolicySettings;
+namespace CurrencyApi.Infrastructure.CBRPolicyHandler;
 
 public interface IRetrySettingsHandler
 {
