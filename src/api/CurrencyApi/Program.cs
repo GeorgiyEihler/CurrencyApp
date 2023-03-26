@@ -4,12 +4,18 @@ using CurrencyApi.Presentation.AssamblyMarker;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-ServiceExtensions.ConfigureCBRClients(builder.Services, builder.Configuration);
+LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), $"/LoggerSettings/nlog.{environment}.config"));
+
+
+builder.Services.ConfigureLogging();
+
+builder.Services.ConfigureCBRClients(builder.Configuration);
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(IPresentationAssamplyMarker).Assembly);

@@ -1,10 +1,8 @@
-﻿using CurrencyApi.Infrastructure.CBRPolicySettings;
-using Microsoft.Extensions.Logging;
+﻿using Currency.Contract.LogManager;
+using CurrencyApi.Infrastructure.CBRPolicySettings;
 using Polly;
-using Polly.Contrib.WaitAndRetry;
 using Polly.Extensions.Http;
 using Polly.Timeout;
-using System.Runtime.CompilerServices;
 
 namespace CurrencyApi.Infrastructure.ClientSettings;
 
@@ -15,13 +13,16 @@ public static class CBRPolicyBuilder
     {
         var settings = new CBRRetrySettingsHandler(retrySettings);
 
-        return builder.AddPolicyHandler(
+        return builder.AddPolicyHandler((services, request) =>
             HttpPolicyExtensions
             .HandleTransientHttpError()
             .Or<TimeoutRejectedException>()
             .WaitAndRetryAsync(
                 settings.RetryCount,
                 settings.SleepDurationProvider,
-                settings.OnRetry));
+                (result, timeSpan, retryCount, context) => {
+                    var logger = services.GetRequiredService<ILoggingManager>();
+                    settings.OnRetry(result, timeSpan, retryCount, context, logger);    
+                }));
     }
 }
