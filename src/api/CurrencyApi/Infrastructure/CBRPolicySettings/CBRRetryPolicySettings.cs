@@ -6,6 +6,5 @@
 public class CBRRetryPolicySettings
 {
     public int RetryCount { get; set; }
-    public int MedianFirstRetryDelaySeconds { get; set; }
-    public TimeSpan MedianFirstRetryDelay => TimeSpan.FromSeconds(MedianFirstRetryDelaySeconds);
+    public TimeSpan MedianFirstRetryDelaySeconds { get; set; }
 }
