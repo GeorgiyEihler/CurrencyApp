@@ -1,10 +1,19 @@
+using CurrencyApi.Extention;
+using CurrencyApi.Infrastructure.ClientSettings;
 using CurrencyApi.Presentation.AssamblyMarker;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+ServiceExtensions.ConfigureCBRClients(builder.Services, builder.Configuration);
+
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(IPresentationAssamplyMarker).Assembly);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
