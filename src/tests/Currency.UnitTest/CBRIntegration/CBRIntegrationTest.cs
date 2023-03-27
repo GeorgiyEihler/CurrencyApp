@@ -1,4 +1,5 @@
-﻿using Currency.Contract.LogManager;
+﻿using Currency.Contract.Context;
+using Currency.Contract.LogManager;
 using Currency.Service.CBRCurrencyService;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Engine;
 using Moq;
@@ -15,6 +16,8 @@ public class CBRIntegrationTest
 
         var logger = new Mock<ILoggingManager>();
 
+        var repository = new Mock<ICurrencyRepository>();
+
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         using var client = new HttpClient();
@@ -25,7 +28,7 @@ public class CBRIntegrationTest
 
         httpClientFactoryMock.Setup(factory => factory.CreateClient("CBRClient")).Returns(client);
 
-        var service = new CBRService(logger.Object, httpClientFactoryMock.Object);
+        var service = new CBRService(logger.Object, httpClientFactoryMock.Object, repository.Object);
 
         var response = await service.GetCurrencyInformation(true);
 
@@ -41,6 +44,8 @@ public class CBRIntegrationTest
 
         var logger = new Mock<ILoggingManager>();
 
+        var repository = new Mock<ICurrencyRepository>();
+
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         using var client = new HttpClient();
@@ -51,7 +56,7 @@ public class CBRIntegrationTest
 
         httpClientFactoryMock.Setup(factory => factory.CreateClient("CBRClient")).Returns(client);
 
-        var service = new CBRService(logger.Object, httpClientFactoryMock.Object);
+        var service = new CBRService(logger.Object, httpClientFactoryMock.Object, repository.Object);
 
         var response = await service.GetCurrencyReate(new DateOnly(2023, 01, 20));
 
@@ -67,6 +72,8 @@ public class CBRIntegrationTest
 
         var logger = new Mock<ILoggingManager>();
 
+        var repository = new Mock<ICurrencyRepository>();
+
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         using var client = new HttpClient();
@@ -77,7 +84,7 @@ public class CBRIntegrationTest
 
         httpClientFactoryMock.Setup(factory => factory.CreateClient("CBRDailyClient")).Returns(client);
 
-        var service = new CBRService(logger.Object, httpClientFactoryMock.Object);
+        var service = new CBRService(logger.Object, httpClientFactoryMock.Object, repository.Object);
 
         var response = await service.GetLastedRate();
 

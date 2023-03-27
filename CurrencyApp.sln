@@ -7,39 +7,41 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA61EEFB-25F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{226E38E3-EEBE-49F7-9C7D-EA746FF12100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyApi", "src\api\CurrencyApi\CurrencyApi.csproj", "{74505F93-2DE5-4968-BC2B-4A71FC14CDA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyApi", "src\api\CurrencyApi\CurrencyApi.csproj", "{74505F93-2DE5-4968-BC2B-4A71FC14CDA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyApi.Presentation", "src\api\CurrencyApi.Presentation\CurrencyApi.Presentation.csproj", "{A581FAE8-EE13-42E3-B9F4-0562BAB7ECC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyApi.Presentation", "src\api\CurrencyApi.Presentation\CurrencyApi.Presentation.csproj", "{A581FAE8-EE13-42E3-B9F4-0562BAB7ECC0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{FFB38E82-0F5D-4218-AE2A-945CBA5E0279}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currency.Shared", "src\shared\Currency.Shared\Currency.Shared.csproj", "{64BA95C1-AA47-494B-A770-112C23591D1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency.Shared", "src\shared\Currency.Shared\Currency.Shared.csproj", "{64BA95C1-AA47-494B-A770-112C23591D1A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{67ED2441-E453-40E7-8BB3-82F89287593A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currency.Contract", "src\domain\Currency.Contract\Currency.Contract.csproj", "{1614F102-B9C3-45C2-AEF9-D525C71A3D6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency.Contract", "src\domain\Currency.Contract\Currency.Contract.csproj", "{1614F102-B9C3-45C2-AEF9-D525C71A3D6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currency.Model", "src\domain\Currency.Model\Currency.Model.csproj", "{B4EAF361-5AA7-4762-82A3-069B682342A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency.Model", "src\domain\Currency.Model\Currency.Model.csproj", "{B4EAF361-5AA7-4762-82A3-069B682342A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{D099D18C-CFB2-4F1C-9551-3C805FA1751F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currency.Logger", "src\service\Currency.Logger\Currency.Logger.csproj", "{6B48799A-9C0A-4A47-B45A-3C65231B1B46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency.Logger", "src\service\Currency.Logger\Currency.Logger.csproj", "{6B48799A-9C0A-4A47-B45A-3C65231B1B46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currency.Service", "src\service\Currency.Service\Currency.Service.csproj", "{5DBDBFF6-D833-4EF4-A57A-E286BDC0564C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency.Service", "src\service\Currency.Service\Currency.Service.csproj", "{5DBDBFF6-D833-4EF4-A57A-E286BDC0564C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currency.Repository", "src\domain\Currency.Repository\Currency.Repository.csproj", "{CA80289A-C6F4-4363-8C81-44C7C05452E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency.Repository", "src\domain\Currency.Repository\Currency.Repository.csproj", "{CA80289A-C6F4-4363-8C81-44C7C05452E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9F3C1C36-A94C-42AE-B501-0EE6CF0CBB56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currency.UnitTest", "src\tests\Currency.UnitTest\Currency.UnitTest.csproj", "{BAEF9BB2-D671-4117-A895-968F0D95F6C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency.UnitTest", "src\tests\Currency.UnitTest\Currency.UnitTest.csproj", "{BAEF9BB2-D671-4117-A895-968F0D95F6C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlScripts", "SqlScripts", "{7E6A369A-E076-4A32-8204-898F640F90B5}"
+	ProjectSection(SolutionItems) = preProject
+		DatabaseInit.sql = DatabaseInit.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{74505F93-2DE5-4968-BC2B-4A71FC14CDA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -79,6 +81,9 @@ Global
 		{BAEF9BB2-D671-4117-A895-968F0D95F6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAEF9BB2-D671-4117-A895-968F0D95F6C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{226E38E3-EEBE-49F7-9C7D-EA746FF12100} = {BA61EEFB-25F8-4F80-964C-A47D8EF584AE}
 		{74505F93-2DE5-4968-BC2B-4A71FC14CDA4} = {226E38E3-EEBE-49F7-9C7D-EA746FF12100}
@@ -94,5 +99,9 @@ Global
 		{CA80289A-C6F4-4363-8C81-44C7C05452E9} = {67ED2441-E453-40E7-8BB3-82F89287593A}
 		{9F3C1C36-A94C-42AE-B501-0EE6CF0CBB56} = {BA61EEFB-25F8-4F80-964C-A47D8EF584AE}
 		{BAEF9BB2-D671-4117-A895-968F0D95F6C7} = {9F3C1C36-A94C-42AE-B501-0EE6CF0CBB56}
+		{7E6A369A-E076-4A32-8204-898F640F90B5} = {BA61EEFB-25F8-4F80-964C-A47D8EF584AE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78621F96-3438-45D1-88BA-D380B37A48BE}
 	EndGlobalSection
 EndGlobal
