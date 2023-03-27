@@ -3,6 +3,7 @@ using Currency.Logger;
 using CurrencyApi.Infrastructure.CBRPolicySettings;
 using CurrencyApi.Infrastructure.ClientPolicyBuilder;
 using CurrencyApi.Infrastructure.ClientSettings;
+using System.Net.Http;
 
 namespace CurrencyApi.Extention;
 
@@ -36,7 +37,10 @@ public static class ServiceExtensions
         if (cbrClientSettings is not null)
         {
             services.AddHttpClient(ClientConstants.CBRClient, httpClient =>
-                httpClient.BaseAddress = new Uri(cbrClientSettings.BaseUri))
+                {
+                    httpClient.BaseAddress = new Uri(cbrClientSettings.BaseUri);
+                    httpClient.DefaultRequestHeaders.Add("Accept", "application/xml");
+                })
                 .AddRetryPolicy(retryPolicySettings)
                 .AddCircuitBreakerPolicy(circuitBreakerPolicySettings);
         }
@@ -46,7 +50,10 @@ public static class ServiceExtensions
         if (cbrDailySettings is not null)
         {
             services.AddHttpClient(ClientConstants.CBRDailyClient, httpClient =>
-                httpClient.BaseAddress = new Uri(cbrDailySettings.BaseUri))
+                {
+                    httpClient.BaseAddress = new Uri(cbrDailySettings.BaseUri);
+                    httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+                })
                 .AddRetryPolicy(retryPolicySettings)
                 .AddCircuitBreakerPolicy(circuitBreakerPolicySettings);
         }
