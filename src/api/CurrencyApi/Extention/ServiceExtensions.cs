@@ -1,8 +1,16 @@
-﻿using Currency.Contract.LogManager;
+﻿using Currency.Contract.Context;
+using Currency.Contract.CurrencyService;
+using Currency.Contract.LogManager;
 using Currency.Logger;
+using Currency.Repository.CurrencyRepositoy;
+using Currency.Repository.DapperContext;
+using Currency.Service.CBRCurrencyService;
 using CurrencyApi.Infrastructure.CBRPolicySettings;
 using CurrencyApi.Infrastructure.ClientPolicyBuilder;
 using CurrencyApi.Infrastructure.ClientSettings;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
+using System.Data;
 using System.Net.Http;
 
 namespace CurrencyApi.Extention;
@@ -65,4 +73,13 @@ public static class ServiceExtensions
     /// <param name="services">Service collection.</param>
     public static void ConfigureLogging(this IServiceCollection services) =>
         services.AddSingleton<ILoggingManager, CurrencyLogManager>();
+
+    public static void ConfigureDbContext(this IServiceCollection services) =>
+        services.AddSingleton<ICurrencyContext, CurrencyDbContext>();
+
+    public static void ConfigureRepositoryes(this IServiceCollection services) =>
+        services.AddScoped<ICurrencyRepository, CerrencyRepository>();
+
+    public static void ConfigureCurrencyService(this IServiceCollection services) =>
+        services.AddScoped<ICurrencyService, CBRService>();
 }
